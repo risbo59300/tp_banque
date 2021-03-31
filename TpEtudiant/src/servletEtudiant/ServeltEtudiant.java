@@ -8,8 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import etudiant.Etudiant;
+import etudiant.EtudiantJavaBean;
 
 /**
  * Servlet implementation class ServeltEtudiant
@@ -39,21 +38,23 @@ public class ServeltEtudiant extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String moyenne = request.getParameter("moyenne");
+		String code = request.getParameter("code");
 		
-		float a = Float.parseFloat(moyenne);
+		EtudiantJavaBean etudiantJavaBean = new EtudiantJavaBean();
 		
-		Etudiant etudiant = new Etudiant();
-		etudiant.setMoyenne(a);
+		int codeEtudiant = Integer.parseInt(code);
+		etudiantJavaBean.setCodeEtudiant(codeEtudiant);
 		
-		PrintWriter out = response.getWriter();
-		if (etudiant.calculMoyenne()) 
+		request.setAttribute("nom", etudiantJavaBean.getNom());
+		
+		if (etudiantJavaBean.calculMoyenne()) 
 		{
-			out.println("Vous n'avez pas la moyenne");
+			request.getRequestDispatcher("/admis.jsp").forward(request, response);
 		}
 		else 
 		{
-			out.println("Vous avez la moyenne");
+			request.getRequestDispatcher("/refus.jsp").forward(request, response);
+
 		}
 		
 	
