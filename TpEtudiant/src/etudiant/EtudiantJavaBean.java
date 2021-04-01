@@ -1,7 +1,7 @@
 package etudiant;
 
 import persistance.entities.Etudiant;
-import persistence.Dao.EtudiantImpl;
+import persistence.Dao.EtudiantDaoImpl;
 
 public class EtudiantJavaBean{
 	private int codeEtudiant;
@@ -11,7 +11,7 @@ public class EtudiantJavaBean{
 	 * @return the codeEtudiant
 	 */
 	
-	EtudiantImpl etudianImpl=new EtudiantImpl();
+	EtudiantDaoImpl etudianImpl=new EtudiantDaoImpl();
 	Etudiant etudiant=new Etudiant();
 	public int getCodeEtudiant() {
 		return codeEtudiant;
